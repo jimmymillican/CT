@@ -1,0 +1,39 @@
+﻿@model ClubMembership.Models.Edition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h2>@Html.DisplayFor(model => model.Title)</h2>
+    <h4>Trainer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Campaign title</th>
+                    <th>Current level</th>
+                </tr>
+                @foreach (var item in Model.Campaigns)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Level)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EditionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

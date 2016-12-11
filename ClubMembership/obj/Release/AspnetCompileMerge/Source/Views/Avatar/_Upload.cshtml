@@ -1,0 +1,53 @@
+﻿@Scripts.Render("~/bundles/jqueryform")
+@Scripts.Render("~/bundles/jcrop")
+@Scripts.Render("~/bundles/avatar")
+@Styles.Render("~/Content/jcrop")
+@Styles.Render("~/Content/avatar")
+@using ClubMembership.Models
+@model ClubMembership.Models.Member
+
+
+<section id="avatar-upload-box">
+    @using (Ajax.BeginForm("_Upload", "Avatar",
+                        new AjaxOptions() { HttpMethod = "POST" },
+                        new { enctype = "multipart/form-data", id = "avatar-upload-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            : @Html.DisplayFor(model => model.MemberID) 
+        </div>
+        <br>
+        <div>
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            : @Html.DisplayFor(model => model.FullName) 
+        </div>
+        <br>
+        <label class="btn btn-default btn-file">
+            Click to Upload Photo <input type="file" name="files"style="display: none;">
+        </label><br><br>
+        <div class="upload-file-notice">Maximum Size: <span id="avatar-max-size"></span> MB</div>
+    }
+    <div class="upload-progress col-md-6 hidden">
+        <div class="upload-percent-value pull-left">0%</div>
+        <div class="upload-percent-bar pull-left"></div>
+    </div>
+    <div id="upload-status"></div>
+</section>
+<section id="avatar-crop-box" class="hidden">
+    <p>
+        <img src="" id="crop-avatar-target" alt="Uploaded image" />
+        <div id="preview-pane">
+            <div class="preview-container">
+                <img src="" class="jcrop-preview" alt="Preview" />
+            </div>
+        </div>
+    </p>
+    <p>
+        <input type="hidden" id="crop-member-id" value="@ViewBag.id"/>
+        <button class="buttonStyleAdd" onclick=" saveAvatar() ">Save Photo</button>
+    </p>
+</section>
+<div id="avatar-result" class="hidden">
+    <img src="" alt="Final Image" />
+</div>

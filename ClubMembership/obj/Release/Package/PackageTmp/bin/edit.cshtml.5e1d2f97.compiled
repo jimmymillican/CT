@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/Campaign/Edit.cshtml" hash="ffffffff9d507833" filehash="26828306af08" flags="110000" assembly="App_Web_tsmdixtq" type="ASP._Page_Views_Campaign_Edit_cshtml">
+    <filedeps>
+        <filedep name="/Views/Campaign/Edit.cshtml" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,71 @@
+﻿.buttonStyle {
+	background: rgb(138,43,226);
+    border: 0;
+    padding: 5px 10px;
+    color: white;
+    letter-spacing: 1.3px;
+	cursor: pointer;
+	transition: all .35s ease-in-out;
+}
+
+.buttonStyle:hover,
+.buttonStyle:active,
+.buttonStyle:focus {
+	outline: 0;
+    background-color: rgb(138,43,226);
+}
+
+.buttonStyleAdd {
+	background: rgb(59,169,67);
+    border: 0;
+    padding: 5px 10px;
+    color: white;
+    letter-spacing: 1.3px;
+	cursor: pointer;
+	transition: all .35s ease-in-out;
+}
+
+.buttonStyleAdd:hover,
+.buttonStyleAdd:active,
+.buttonStyleAdd:focus {
+	outline: 0;
+    background-color: rgb(59,130,100);
+}
+
+.buttonStyleDelete {
+	background: rgb(193,50,50);
+    border: 0;
+    padding: 5px 10px;
+    color: white;
+    letter-spacing: 1.3px;
+	cursor: pointer;
+	transition: all .35s ease-in-out;
+}
+
+.buttonStyleDelete:hover,
+.buttonStyleDelete:active,
+.buttonStyleDelete:focus {
+	outline: 0;
+    background-color: rgb(178,0,0);
+}
+
+.buttonStyleRight:hover,
+.buttonStyleRight:focus {
+	outline: 0;
+    background-color: rgb(138,43,226);
+}
+
+.box-image {
+	width: 150px;
+	height: 200px;
+    vertical-align: middle;
+	
+	transition: all .35s ease-in-out;
+	box-shadow: 3px 3px 10px rgb(65, 66, 66);
+}
+
+.box-image:hover, 
+.box-image:focus {
+	transform: translateY(-5px);
+	box-shadow: 8px 4px 26px rgb(65, 66, 66));
+}

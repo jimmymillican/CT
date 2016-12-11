@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<ClubMembership.Models.Timesheet>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Timesheet";
+}
+
+<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/timesheet_icon.jpg")" /> Timesheet</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "TimeSheet")'">Record New Entry</button>
+</p>
+
+@using (Html.BeginForm("Index", "TimeSheet", FormMethod.Get))
+{
+    <p>
+        Search by Member: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="buttonStyle"/>
+     | Filter: 
+            <button type="button" class="buttonStyle" onclick="location.href = '@Url.Action("Index", "TimeSheet", new {topCondition = true, type = "AllToday"})'">All Today</button>
+            <button type="button" class="buttonStyle" onclick="location.href = '@Url.Action("Index", "TimeSheet", new {topCondition = true, type = "ActiveEntry"})'">Active</button>
+</p>
+}
+
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.ActionLink("Member", "Index", new { sortOrder = ViewBag.FullNameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                @Html.ActionLink("Start", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+
+            </th>
+            <th>
+                @Html.ActionLink("End", "Index", new { sortOrder = ViewBag.DateEndSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img id="imgPhoto" src="@Url.Content("~/Avatars/" + @item.Member.Id + ".jpg")" width="60px" />
+                </td>
+                <td> 
+                    @Html.DisplayFor(modelItem => item.Member.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecordStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    [ @Html.ActionLink("Record End", "Edit", new { id = item.TimeSheetId }) ]
+                </td>
+
+            </tr>
+        }
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
