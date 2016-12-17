@@ -19,6 +19,14 @@ namespace ClubMembership.DAL
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Edition> Editions { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
+
+        public DbSet<AccountType> AccountType { get; set; }
+        public DbSet<MemberAccount> MemberAccount { get; set; }
+        public DbSet<MemberAccountPayment> MemberAccountPayment { get; set; }
+        public DbSet<MemberPaymentMethod> MemberPaymentMethod { get; set; }
+        public DbSet<PaymentMethod> PaymentMethod { get; set; }
+        public DbSet<PaymentStatus> PaymentStatus { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -31,6 +39,7 @@ namespace ClubMembership.DAL
                    cs.MapRightKey("MemberId");
                    cs.ToTable("CampaignMember");
                });
+            
         }
     }
 }

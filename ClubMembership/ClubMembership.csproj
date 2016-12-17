@@ -173,6 +173,7 @@
     <Compile Include="Controllers\EditionController.cs" />
     <Compile Include="Controllers\GoogleAuthCallBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\TimeSheetController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="DAL\GoogleApiConnector.cs" />
@@ -225,8 +226,22 @@
     <Compile Include="Migrations\201611142206442_AddDeletedtoMember.Designer.cs">
       <DependentUpon>201611142206442_AddDeletedtoMember.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612111326555_Add Payment Details Structure.cs" />
+    <Compile Include="Migrations\201612111326555_Add Payment Details Structure.Designer.cs">
+      <DependentUpon>201612111326555_Add Payment Details Structure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612111456392_Add Payment Details Structure correct-version.cs" />
+    <Compile Include="Migrations\201612111456392_Add Payment Details Structure correct-version.Designer.cs">
+      <DependentUpon>201612111456392_Add Payment Details Structure correct-version.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\PaymentStatus.cs" />
     <Compile Include="Models\AddedCampaigns.cs" />
+    <Compile Include="Models\MemberAccountPayment.cs" />
+    <Compile Include="Models\MemberAccount.cs" />
+    <Compile Include="Models\AccountType.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
+    <Compile Include="Models\MemberPaymentMethod.cs" />
     <Compile Include="Models\Timesheet.cs" />
     <Compile Include="Models\Campaign.cs" />
     <Compile Include="Models\Edition.cs" />
@@ -325,6 +340,8 @@
     <Content Include="Views\Timesheet\Edit.cshtml" />
     <Content Include="Views\Avatar\Upload.cshtml" />
     <Content Include="Views\Avatar\_Upload.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -368,6 +385,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611142206442_AddDeletedtoMember.resx">
       <DependentUpon>201611142206442_AddDeletedtoMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612111326555_Add Payment Details Structure.resx">
+      <DependentUpon>201612111326555_Add Payment Details Structure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612111456392_Add Payment Details Structure correct-version.resx">
+      <DependentUpon>201612111456392_Add Payment Details Structure correct-version.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

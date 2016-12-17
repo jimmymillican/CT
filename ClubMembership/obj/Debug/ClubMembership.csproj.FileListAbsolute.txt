@@ -72,3 +72,5 @@ C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMemb
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\bin\Google.Apis.Auth.Mvc4.dll
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\bin\Google.Apis.Auth.Mvc4.pdb
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\bin\Google.Apis.Auth.Mvc4.xml
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.AddPaymentDetailsStructure.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.AddPaymentDetailsStructurecorrectversion.resources

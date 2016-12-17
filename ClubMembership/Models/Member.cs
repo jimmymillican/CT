@@ -56,7 +56,8 @@ namespace ClubMembership.Models
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
-        [Display(Name = "Address Line 1")]
+        [Display(Name = "Address")]
+        [DataType(DataType.MultilineText)]
         public string Address1 { get; set; }
 
         [Display(Name = "Town")]
@@ -83,6 +84,7 @@ namespace ClubMembership.Models
         public bool Expired { get; set; }
 
         [Display(Name = "Expiry Notes")]
+        [DataType(DataType.MultilineText)]
         public string ExpiryNotes { get; set; }
 
         [Display(Name = "Deleted")]
