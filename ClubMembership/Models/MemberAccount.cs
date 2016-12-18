@@ -12,7 +12,9 @@ namespace ClubMembership.Models
         public int MemberAccountId { get; set; }
 
         [Display(Name = "Member")]
-        public virtual Member MemberId { get; set; }
+        public int MemberId { get; set; }
+
+        public virtual Member Member { get; set; }
 
         [Display(Name = "Account Type")]
         public virtual AccountType AccountTypeId { get; set; }
@@ -24,6 +26,15 @@ namespace ClubMembership.Models
         [Display(Name = "Account Closure Date")]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
+
+        [Display(Name = "Account Name")]
+        public string AccountFullDescription
+        {
+            get
+            {
+                return Member.FullName + " (Account: " + MemberAccountId;
+            }
+        }
 
     }
 }

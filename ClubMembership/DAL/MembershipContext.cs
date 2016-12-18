@@ -39,7 +39,9 @@ namespace ClubMembership.DAL
                    cs.MapRightKey("MemberId");
                    cs.ToTable("CampaignMember");
                });
-            
+
+          
+
         }
     }
 }

@@ -13,16 +13,19 @@ namespace ClubMembership.Models
         public int MemberAccountPaymentId { get; set; }
 
         [Display(Name = "Account Id")]
-        public virtual MemberAccount AccountId { get; set; }
-
-        [Display(Name = "Member")]
-        public virtual Member MemberId { get; set; }
+        public int MemberAccountId { get; set; }
+        
+        public virtual MemberAccount MemberAccount { get; set; }
 
         [Display(Name = "Payment Type")]
-        public virtual PaymentMethod PaymentMethodId { get; set; }
+        public int PaymentMethodId { get; set; }
+
+        public virtual PaymentMethod PaymentMethod { get; set; }
 
         [Display(Name = "Payment Status")]
-        public virtual PaymentStatus PaymentStatusId { get; set; }
+        public int PaymentStatusId { get; set; }
+
+        public virtual PaymentStatus PaymentStatus { get; set; }
 
         [Display(Name = "Payment Date")]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -34,6 +37,7 @@ namespace ClubMembership.Models
 
         [Display(Name = "Additional Details")]
         public string AdditionalDetails { get; set; }
+
 
 
     }

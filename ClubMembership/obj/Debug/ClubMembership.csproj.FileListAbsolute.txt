@@ -74,3 +74,9 @@ C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMemb
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\bin\Google.Apis.Auth.Mvc4.xml
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.AddPaymentDetailsStructure.resources
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.AddPaymentDetailsStructurecorrectversion.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.changetableforpayments.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethodTest.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethodTestremoval.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethodchange.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethod.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethodchanges.resources

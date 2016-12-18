@@ -234,6 +234,30 @@
     <Compile Include="Migrations\201612111456392_Add Payment Details Structure correct-version.Designer.cs">
       <DependentUpon>201612111456392_Add Payment Details Structure correct-version.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612181906495_change table for payments.cs" />
+    <Compile Include="Migrations\201612181906495_change table for payments.Designer.cs">
+      <DependentUpon>201612181906495_change table for payments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182022595_PayMethod Test.cs" />
+    <Compile Include="Migrations\201612182022595_PayMethod Test.Designer.cs">
+      <DependentUpon>201612182022595_PayMethod Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182126493_PayMethod Test removal.cs" />
+    <Compile Include="Migrations\201612182126493_PayMethod Test removal.Designer.cs">
+      <DependentUpon>201612182126493_PayMethod Test removal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182252147_PayMethod change.cs" />
+    <Compile Include="Migrations\201612182252147_PayMethod change.Designer.cs">
+      <DependentUpon>201612182252147_PayMethod change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182301503_PayMethod .cs" />
+    <Compile Include="Migrations\201612182301503_PayMethod .Designer.cs">
+      <DependentUpon>201612182301503_PayMethod .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612182345051_PayMethod changes.cs" />
+    <Compile Include="Migrations\201612182345051_PayMethod changes.Designer.cs">
+      <DependentUpon>201612182345051_PayMethod changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PaymentStatus.cs" />
     <Compile Include="Models\AddedCampaigns.cs" />
@@ -391,6 +415,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612111456392_Add Payment Details Structure correct-version.resx">
       <DependentUpon>201612111456392_Add Payment Details Structure correct-version.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612181906495_change table for payments.resx">
+      <DependentUpon>201612181906495_change table for payments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182022595_PayMethod Test.resx">
+      <DependentUpon>201612182022595_PayMethod Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182126493_PayMethod Test removal.resx">
+      <DependentUpon>201612182126493_PayMethod Test removal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182252147_PayMethod change.resx">
+      <DependentUpon>201612182252147_PayMethod change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182301503_PayMethod .resx">
+      <DependentUpon>201612182301503_PayMethod .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612182345051_PayMethod changes.resx">
+      <DependentUpon>201612182345051_PayMethod changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

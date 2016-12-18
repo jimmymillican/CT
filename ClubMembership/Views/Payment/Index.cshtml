@@ -49,17 +49,17 @@
                     @Html.DisplayFor(modelItem => item.PaymentDate)
                 </td>
                 <td> 
-                    @Html.DisplayFor(modelItem => item.MemberId.FullName)
+                    @Html.DisplayFor(modelItem => item.MemberAccount.Member.FullName)
                 </td>
          
                 <td>
-                    @Html.DisplayFor(modelItem => item.PaymentMethodId.Description)
+                    @Html.DisplayFor(modelItem => item.PaymentMethod.Description)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PaymentStatusId.Description)
+                    @Html.DisplayFor(modelItem => item.PaymentStatus.Description)
                 </td>
                 <td>
                     [ @Html.ActionLink(">>", "Edit", new { id = item.MemberAccountPaymentId }) ]

@@ -11,10 +11,10 @@ namespace ClubMembership.Models
         public int MemberPaymentMethodId { get; set; }
 
         [Display(Name = "Member")]
-        public virtual Member MemberId { get; set; }
+        public int MemberId { get; set; }
 
         [Display(Name = "Payment Type")]
-        public virtual PaymentMethod PaymentMethodId { get; set; }
+        public int PaymentMethodId { get; set; }
          
         public int CardNumber { get; set; }
 

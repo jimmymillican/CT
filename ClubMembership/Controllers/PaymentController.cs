@@ -14,7 +14,7 @@ using System.Data.Entity.Infrastructure;
 using System.Runtime.CompilerServices;
 
 namespace ClubMembership.Controllers
-{
+{ 
     public class PaymentController : Controller
     {
         private MembershipContext db = new MembershipContext();
@@ -67,42 +67,54 @@ namespace ClubMembership.Controllers
 
                 var memberAccountPayment = from m in db.MemberAccountPayment select m;
 
-       
+
+
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
 
-                    memberAccountPayment = memberAccountPayment.Where(s => ((s.MemberId.FirstName)+  " " + (s.MemberId.LastName)).Contains(searchString));
+                   // from t1 in db.Table1
+                    //join t2 in db.Table2 on t1.field equals t2.field
+                    //select new { t1.field2, t2.field3 }
+                     
+                     memberAccountPayment = from a in db.MemberAccountPayment
+                                            join acc in db.MemberAccount on a.MemberAccountId equals acc.MemberAccountId
+                                            join mem in db.Members on acc.MemberId equals mem.Id
+                                        where mem.FullName.Contains(searchString)
+                                         select a;
+
+                   // memberAccountPayment = memberAccountPayment.Where(s => ((s.memberAccount) + " " + (s.MemberId.LastName)).Contains(searchString));
                 }
+
+                memberAccountPayment = from a in db.MemberAccountPayment
+                                       join acc in db.MemberAccount on a.MemberAccountId equals acc.MemberAccountId
+                                       join mem in db.Members on acc.MemberId equals mem.Id
+                                       select a;
                 switch (sortOrder)
                 {
-                    case "fullname_desc":
-                        memberAccountPayment = memberAccountPayment.OrderByDescending(m => m.MemberId.FirstName);
-                        break;
-                    case "fullname":
-                        memberAccountPayment = memberAccountPayment.OrderBy(m => m.MemberId.FirstName);
-                        break;
-                    default:
+                //    case "fullname_desc":
+                //        memberAccountPayment = memberAccountPayment.OrderByDescending(m => m.MemberId.FirstName);
+                //        break;
+                //    case "fullname":
+                //        memberAccountPayment = memberAccountPayment.OrderBy(m => m.MemberId.FirstName);
+                //        break;
+                   default:
                         memberAccountPayment = memberAccountPayment.OrderByDescending(m => m.PaymentDate);
                         break;
                 }
                 return View(memberAccountPayment.ToPagedList(pageNumber, pageSize));
             } 
         }
-
-
+         
 
         // GET: Campaign/Create
         public ActionResult Create(int? id)
         {
-            ViewBag.MemberId = new SelectList(db.Members
-                        .Where(o => o.Deleted == false).ToList(), "Id", "Fullname", id);
-            ViewBag.AccountId_MemberAccountId = new SelectList(db.MemberAccount
-                       .ToList(), "MemberAccountId", "MemberAccountId", id);
-            ViewBag.PaymentMethodId_PaymentMethodId = new SelectList(db.PaymentMethod
-                       .ToList(), "PaymentMethodId", "Description", id);
-            ViewBag.PaymentStatusId_PaymentStatusId = new SelectList(db.PaymentStatus
-                       .ToList(), "PaymentStatusId", "Description", id);
+           ViewBag.MemberAccountId = new SelectList(db.MemberAccount
+                       .ToList(), "MemberAccountId", "MemberAccountId");
+            ViewBag.PaymentMethodId = new SelectList(db.PaymentMethod, "PaymentMethodId", "Description");
+            ViewBag.PaymentStatusId = new SelectList(db.PaymentStatus
+                       .ToList(), "PaymentStatusId", "Description"); 
             return View();
         }
 
@@ -111,26 +123,24 @@ namespace ClubMembership.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PaymentDate,Amount,AdditionalDetails,AccountId_MemberAccountId,MemberId_Id,PaymentMethodId_PaymentMethodId,PaymentStatusId_PaymentStatusId")] MemberAccountPayment Payment)
+        public ActionResult Create([Bind(Include = "MemberAccountId,MemberId,PaymentMethodId,PaymentStatusId,PaymentDate,Amount,AdditionalDetails")] MemberAccountPayment memberAccountPayment)
         {
-     
-            Payment.PaymentDate = DateTime.UtcNow;
+            memberAccountPayment.PaymentDate = DateTime.UtcNow;
             if (ModelState.IsValid)
             {
-                db.MemberAccountPayment.Add(Payment);
+                db.MemberAccountPayment.Add(memberAccountPayment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MemberId = new SelectList(db.Members
-                        .Where(o => o.Deleted == false).ToList(), "Id", "Fullname", Payment.MemberId);
-            ViewBag.MemberAccount = new SelectList(db.MemberAccount
-                       .ToList(), "MemberAccountId", "MemberAccountId", Payment.AccountId);
+            ViewBag.AccountId = new SelectList(db.MemberAccount
+                       .ToList(), "MemberAccountId", "MemberAccountId", memberAccountPayment.MemberAccountId);
             ViewBag.PaymentMethodId = new SelectList(db.PaymentMethod
-                       .ToList(), "PaymentMethodId", "Description", Payment.PaymentMethodId);
+                       .ToList(), "PaymentMethodId", "Description", memberAccountPayment.PaymentMethodId);
             ViewBag.PaymentStatusId = new SelectList(db.PaymentStatus
-                       .ToList(), "PaymentStatusId", "Description", Payment.PaymentStatusId);
-            return View(Payment);
+                       .ToList(), "PaymentStatusId", "Description", memberAccountPayment.PaymentStatusId);
+
+            return View();
         }
 
         //// GET: Campaign/Edit/5
