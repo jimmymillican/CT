@@ -1,6 +1,6 @@
 ﻿@model ClubMembership.Models.MemberAccountPayment
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Payments";
 }
 <h2>Record Payment</h2>
 
@@ -13,12 +13,16 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
- 
+
         <div class="form-group">
             @Html.LabelFor(model => model.MemberAccountId, "Account ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MemberAccountId", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("MemberAccountId", null, htmlAttributes: new { @class = "form-control" })*@
+                <input type="text" id="txtCustomer" name="CustomerName" class="form-control" />
+                @Html.HiddenFor(model => model.MemberAccountId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MemberAccountId, "", new { @class = "text-danger" })
+                
+                <input type="hidden" id="hfCustomer" name="CustomerId" />
             </div>
         </div>
         <div class="form-group">
@@ -36,10 +40,10 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Amount, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -48,7 +52,19 @@
                 @Html.EditorFor(model => model.AdditionalDetails, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AdditionalDetails, "", new { @class = "text-danger" })
             </div>
-        </div> 
+        </div>
+
+        <div class="form-group">
+            Enter  name
+            <div class="col-md-10">
+
+
+            </div>
+        </div>
+
+        <span id="rData"></span>
+
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Record Payment" class="buttonStyleAdd" />
@@ -59,6 +75,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/autocomplete")
 }
+

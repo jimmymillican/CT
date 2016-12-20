@@ -10,6 +10,8 @@ namespace ClubMembership
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                   "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -27,7 +29,7 @@ namespace ClubMembership
           "~/Scripts/site.avatar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jcrop").Include(
-          "~/Scripts/jquery.Jcrop.js")); 
+          "~/Scripts/jquery.Jcrop.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryform").Include(
                       "~/Scripts/jquery.form.js"));
@@ -41,6 +43,9 @@ namespace ClubMembership
 
             bundles.Add(new StyleBundle("~/Content/avatar").Include(
                       "~/Content/site.avatar.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/autocomplete").Include(
+         "~/js/AutoComplete.js"));
         }
     }
 }

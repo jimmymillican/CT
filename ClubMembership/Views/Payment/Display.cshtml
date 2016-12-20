@@ -1,0 +1,55 @@
+﻿@model ClubMembership.Models.MemberAccountPayment
+@{
+    ViewBag.Title = "Payments";
+}
+<h2>Payment Information for Ref: @Html.DisplayFor(model => model.MemberAccountPaymentId)</h2>
+
+@using(Html.BeginForm())
+{
+                @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+  
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.MemberAccountId, "Account ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.MemberAccount.AccountFullDescription)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentMethodId, "Payment Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.PaymentMethod.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PaymentStatusId, "Payment Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.PaymentStatus.Description)
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Amount)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdditionalDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.AdditionalDetails)
+
+                @*@Html.EditorFor(model => model.AdditionalDetails, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.AdditionalDetails, "", new {@class = "text-danger"})*@
+            </div>
+        </div>
+
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

@@ -32,7 +32,7 @@ namespace ClubMembership.Models
         {
             get
             {
-                return Member.FullName + " (Account: " + MemberAccountId;
+                return Member.FullName + " (Account: " + MemberAccountId + ")";
             }
         }
 

@@ -5,11 +5,16 @@
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Diamond</title>
-    <link href="@Url.Content("~/Content/styles.css")" rel="stylesheet" type="text/css" runat="server" />
+    <link href="@Url.Content("~/Content/styles.css")" rel="stylesheet" type="text/css" runat="server"/>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
+          rel="Stylesheet" type="text/css" />
     @RenderSection("Content", false)
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+
+
 
     
 </head>
@@ -50,3 +55,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

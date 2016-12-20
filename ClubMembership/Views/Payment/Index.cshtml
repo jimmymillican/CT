@@ -3,7 +3,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Timesheet";
+    ViewBag.Title = "Payments";
 }
 
 <h2><img id="imgPhoto" src="@Url.Content("~/images/icons/payment.jpg")" /> Payments</h2>
@@ -15,23 +15,34 @@
 @*test for commit*@
 @using (Html.BeginForm("Index", "Payment", FormMethod.Get))
 {
-    @*<p>
+    <p>
         Search by Member: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" class="buttonStyle"/>
-     | Filter: 
-            <button type="button" class="buttonStyle" onclick="location.href = '@Url.Action("Index", "TimeSheet", new {topCondition = true, type = "AllToday"})'">All Today</button>
-            <button type="button" class="buttonStyle" onclick="location.href = '@Url.Action("Index", "TimeSheet", new {topCondition = true, type = "ActiveEntry"})'">Active</button>
-</p>*@
+        | Filter:
+        <button type="button" class="buttonStyle" onclick="location
+    .href = '@Url.Action("Index", "Payment", new {topCondition = true, type = "Last30Days"})'">Last 30 Days</button>
+        <button type="button" class="buttonStyle" onclick="location.href =
+    '@Url.Action("Index", "Payment", new {topCondition = true, type = "Last12Months"})'">Last 12 Months</button>
+
+    </p>
 }
 
     <table class="table">
         <tr>
-            
+            <th>
+                Ref
+            </th>
             <th>
                 Date
             </th>
             <th>
-                @Html.ActionLink("Member", "Index", new { sortOrder = ViewBag.FullNameSortParm, currentFilter = ViewBag.CurrentFilter })
+                Account
+            </th>
+            <th>
+                Member ID
+            </th>
+            <th>
+               Member @*@Html.ActionLink("Member", "Index", new { sortOrder = ViewBag.FullNameSortParm, currentFilter = ViewBag.CurrentFilter })*@
             </th>
             <th>
                Payment Type
@@ -46,12 +57,21 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.MemberAccountPaymentId)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.PaymentDate)
                 </td>
-                <td> 
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberAccount.MemberAccountId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberAccount.Member.MemberID)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.MemberAccount.Member.FullName)
                 </td>
-         
+
                 <td>
                     @Html.DisplayFor(modelItem => item.PaymentMethod.Description)
                 </td>
@@ -62,11 +82,30 @@
                     @Html.DisplayFor(modelItem => item.PaymentStatus.Description)
                 </td>
                 <td>
-                    [ @Html.ActionLink(">>", "Edit", new { id = item.MemberAccountPaymentId }) ]
+                    [ @Html.ActionLink(">>", "Display", new {id = item.MemberAccountPaymentId}) ]
                 </td>
 
             </tr>
         }
+        <tr>
+
+            <th>
+                </th>
+            <th>
+                 </th>
+            <th>
+                </th>
+            <th>
+                 </th>
+            <th>
+                
+            </th>
+            <th>
+               @ViewBag.memberAccountPaymentTotal
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
     </table>
     <br />
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
