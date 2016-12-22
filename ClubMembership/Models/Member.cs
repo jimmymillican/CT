@@ -91,5 +91,7 @@ namespace ClubMembership.Models
         public bool Deleted { get; set; }
 
         public virtual ICollection<Campaign> Campaigns { get; set; }
+
+        public virtual ICollection<MemberAccount> MemberAccounts { get; set; }
     }
 }

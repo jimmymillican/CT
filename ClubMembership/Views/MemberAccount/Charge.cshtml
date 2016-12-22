@@ -1,28 +1,28 @@
-﻿@model PagedList.IPagedList<ClubMembership.Models.MemberAccountPayment>
+﻿@model PagedList.IPagedList<ClubMembership.Models.MemberAccountCharge>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Payments";
+    ViewBag.Title = "Charges";
 }
 
-<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/payment.jpg")" /> Payments</h2>
+<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/payment.jpg")" /> Charges</h2>
 
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
-    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "Payment")'">Record Payment</button>
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "Charge")'">Create One Charge</button>
 </p>
 @*test for commit*@
-@using (Html.BeginForm("Index", "Payment", FormMethod.Get))
+@using (Html.BeginForm("Charge", "MemberAccount", FormMethod.Get))
 {
     <p>
         Search by Member: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" class="buttonStyle"/>
         | Filter:
         <button type="button" class="buttonStyle" onclick="location
-    .href = '@Url.Action("Index", "Payment", new {topCondition = true, type = "Last30Days"})'">Last 30 Days</button>
+    .href = '@Url.Action("Charge", "MemberAccount", new {topCondition = true, type = "Last30Days"})'">Last 30 Days</button>
         <button type="button" class="buttonStyle" onclick="location.href =
-    '@Url.Action("Index", "Payment", new {topCondition = true, type = "Last12Months"})'">Last 12 Months</button>
+    '@Url.Action("Charge", "MemberAccount", new {topCondition = true, type = "Last12Months"})'">Last 12 Months</button>
 
     </p>
 }
@@ -45,10 +45,10 @@
                Member @*@Html.ActionLink("Member", "Index", new { sortOrder = ViewBag.FullNameSortParm, currentFilter = ViewBag.CurrentFilter })*@
             </th>
             <th>
-               Payment Type
+              Agreed Payment Type
             </th>
             <th>
-                Amount
+                Charge
             </th>
             <th>Status</th> 
             <th></th>
@@ -57,10 +57,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MemberAccountPaymentId)
+                    @Html.DisplayFor(modelItem => item.MemberAccountChargeId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PaymentDate)
+                    @Html.DisplayFor(modelItem => item.ChargeDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.MemberAccount.MemberAccountId)
@@ -79,10 +79,7 @@
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PaymentStatus.Description)
-                </td>
-                <td>
-                    [ @Html.ActionLink(">>", "Display", new {id = item.MemberAccountPaymentId}) ]
+                    [ @Html.ActionLink(">>", "Display", new {id = item.MemberAccountChargeId}) ]
                 </td>
 
             </tr>
@@ -109,5 +106,5 @@
     </table>
     <br />
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index",
+    @Html.PagedListPager(Model, page => Url.Action("Charge",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

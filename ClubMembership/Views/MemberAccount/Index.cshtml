@@ -1,0 +1,23 @@
+﻿@model PagedList.IPagedList<ClubMembership.Models.MemberAccount>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Member Account";
+}
+
+<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/payment.jpg")" /> Member Account</h2>
+
+<p>
+ 
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Charge", "MemberAccount")'">Charges</button>
+</p>
+<p>
+
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Index", "Transaction")'">Payments</button>
+</p>
+
+
+   
+    <br />
+   

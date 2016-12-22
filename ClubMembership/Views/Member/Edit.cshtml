@@ -10,7 +10,10 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+    @Html.HiddenFor(m => m.MemberID)
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Index", "Transaction", new { memberId = Model.MemberID })'">View Transactions</button>
+
     <div class="form-horizontal">
         <h4>Member</h4>
         <hr />

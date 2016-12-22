@@ -142,6 +142,19 @@ namespace ClubMembership.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.imagePath = member.Id + ".jpg?" + DateTime.UtcNow;
+            ViewBag.memberid = member.Id;
+
+            var AccountCheck = (from a in db.MemberAccount
+                                where a.MemberId == id
+                                      && a.Suspended == false
+                                      && (a.EndDate == null || a.EndDate <= DateTime.UtcNow)
+                                select a);
+            if (AccountCheck.Any())
+            {
+                ViewBag.ActiveAccount = true;
+            }
+
             return View(member);
         }
 

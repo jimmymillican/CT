@@ -1,0 +1,62 @@
+﻿@model ClubMembership.Models.MemberAccount
+@{
+    ViewBag.Title = "New Account";
+}
+<h2>Create New Account</h2>
+<h4>Member - @ViewBag.MemberId : @ViewBag.MemberFullName</h4>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr/>
+        
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+             <div class="col-md-10 alert-danger">
+                @ViewBag.WarningMessage
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccountTypeId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("AccountTypeId_AccountTypeId", null, htmlAttributes: new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.AccountTypeId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Amount, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdditionalDetails, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdditionalDetails, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.AdditionalDetails, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.Hidden("hidMemberId", (object) ViewBag.MemberId)
+                <input type="submit" value="Create New Account" class="buttonStyleAdd"/>
+            </div>
+        </div>
+    </div>
+     
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/autocomplete")
+}
+

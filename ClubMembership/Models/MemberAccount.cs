@@ -25,7 +25,28 @@ namespace ClubMembership.Models
 
         [Display(Name = "Account Closure Date")]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
+        [Display(Name = "Blocked")]
+        public bool? Blocked { get; set; }
+
+        [Display(Name = "Blocked Date")]
+        [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? BlockedDate { get; set; }
+
+        [Display(Name = "Suspended")]
+        public bool? Suspended { get; set; }
+
+        [Display(Name = "Suspended Date")]
+        [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? SuspendedDate { get; set; }
+
+        [Display(Name = "Account Charge")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        public float Amount { get; set; }
+
+        [Display(Name = "Account Notes")]
+        public string AdditionalDetails { get; set; }
 
         [Display(Name = "Account Name")]
         public string AccountFullDescription
@@ -35,6 +56,8 @@ namespace ClubMembership.Models
                 return Member.FullName + " (Account: " + MemberAccountId + ")";
             }
         }
+
+        public virtual ICollection<MemberAccountTransaction> MemberAccountTransactions { get; set; }
 
     }
 }

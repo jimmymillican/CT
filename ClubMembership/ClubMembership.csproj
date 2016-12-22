@@ -174,7 +174,7 @@
     <Compile Include="Controllers\GoogleAuthCallBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberAccountController.cs" />
-    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\TimeSheetController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="DAL\GoogleApiConnector.cs" />
@@ -259,10 +259,28 @@
     <Compile Include="Migrations\201612182345051_PayMethod changes.Designer.cs">
       <DependentUpon>201612182345051_PayMethod changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612210009357_Charges creation.cs" />
+    <Compile Include="Migrations\201612210009357_Charges creation.Designer.cs">
+      <DependentUpon>201612210009357_Charges creation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612211329323_Changing payments to transactions.cs" />
+    <Compile Include="Migrations\201612211329323_Changing payments to transactions.Designer.cs">
+      <DependentUpon>201612211329323_Changing payments to transactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612221800425_Added blocked  suspended  nullables.cs" />
+    <Compile Include="Migrations\201612221800425_Added blocked  suspended  nullables.Designer.cs">
+      <DependentUpon>201612221800425_Added blocked  suspended  nullables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612221946313_New Account Changes.cs" />
+    <Compile Include="Migrations\201612221946313_New Account Changes.Designer.cs">
+      <DependentUpon>201612221946313_New Account Changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\MemberAccountCharge.cs" />
+    <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Models\PaymentStatus.cs" />
     <Compile Include="Models\AddedCampaigns.cs" />
-    <Compile Include="Models\MemberAccountPayment.cs" />
+    <Compile Include="Models\MemberAccountTransaction.cs" />
     <Compile Include="Models\MemberAccount.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
@@ -409,14 +427,20 @@
     <Content Include="Views\Timesheet\Edit.cshtml" />
     <Content Include="Views\Avatar\Upload.cshtml" />
     <Content Include="Views\Avatar\_Upload.cshtml" />
-    <Content Include="Views\Payment\Index.cshtml" />
-    <Content Include="Views\Payment\Create.cshtml" />
-    <Content Include="Views\Payment\Display.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Transaction\Display.cshtml" />
+    <Content Include="Views\MemberAccount\Charge.cshtml" />
+    <Content Include="Views\MemberAccount\Index.cshtml" />
+    <Content Include="Views\MemberAccount\Summary.cshtml" />
+    <Content Include="Views\MemberAccount\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Avatars\" />
     <Folder Include="credentials\" />
+    <Folder Include="Migrations\201612221717129_Added blocked\" />
+    <Folder Include="Migrations\201612221717278_Added blocked\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -479,6 +503,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612182345051_PayMethod changes.resx">
       <DependentUpon>201612182345051_PayMethod changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612210009357_Charges creation.resx">
+      <DependentUpon>201612210009357_Charges creation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211329323_Changing payments to transactions.resx">
+      <DependentUpon>201612211329323_Changing payments to transactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612221800425_Added blocked  suspended  nullables.resx">
+      <DependentUpon>201612221800425_Added blocked  suspended  nullables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612221946313_New Account Changes.resx">
+      <DependentUpon>201612221946313_New Account Changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

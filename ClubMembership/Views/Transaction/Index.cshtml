@@ -1,0 +1,123 @@
+﻿@model PagedList.IPagedList<ClubMembership.Models.MemberAccountTransaction>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Member Account Summary";
+}
+<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/payment.jpg")" /> Member Account Summary</h2>
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <h3 style="color: @(ViewBag.AccountBalance <0 ? "Red" : "Blue")">
+        Balance : @String.Format("{0:c}", (ViewBag.AccountBalance ?? 0))
+    </h3>
+    
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "Transaction", new { memberId = ViewBag.MemberId })'">Record Payment</button>
+</p>
+@*test for commit*@
+@using (Html.BeginForm("Index", "Transaction", FormMethod.Get))
+{
+    <p>
+        Search by Member: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="buttonStyle" />
+        | Filter:
+        <button type="button" class="buttonStyle" onclick="location
+    .href = '@Url.Action("Index", "Transaction", new {topCondition = true, type = "Last30Days"})'">
+            Last 30 Days
+        </button>
+        <button type="button" class="buttonStyle" onclick="location.href =
+    '@Url.Action("Index", "Transaction", new {topCondition = true, type = "Last12Months"})'">
+            Last 12 Months
+        </button>
+
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Ref
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Account
+        </th>
+        <th>
+            Member ID
+        </th>
+        <th>
+            Member @*@Html.ActionLink("Member", "Index", new { sortOrder = ViewBag.FullNameSortParm, currentFilter = ViewBag.CurrentFilter })*@
+        </th>
+        <th>
+            Payment Type
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberAccountTransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberAccount.MemberAccountId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberAccount.Member.MemberID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberAccount.Member.FullName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatus.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionType.Description)
+            </td>
+            <td>
+                [ @Html.ActionLink(">>", "Display", new { id = item.MemberAccountTransactionId }) ]
+            </td>
+
+        </tr>
+    }
+    <tr>
+
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+
+        </th>
+        <th>
+            @ViewBag.memberAccountPaymentTotal
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+</table>
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

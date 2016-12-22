@@ -80,3 +80,7 @@ C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMemb
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethodchange.resources
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethod.resources
 C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.PayMethodchanges.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.Chargescreation.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.Changingpaymentstotransactions.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.Addedblockedsuspendednullables.resources
+C:\Users\jimmy.millican\Development\PersonalSites\ClubMembership-master\ClubMembership\ClubMembership\obj\Debug\ClubMembership.Migrations.NewAccountChanges.resources
