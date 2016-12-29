@@ -155,6 +155,14 @@ namespace ClubMembership.Controllers
                 ViewBag.ActiveAccount = true;
             }
 
+            var getLinkid = (from a in db.MemberAccountLinkedMembers
+                                where a.MemberId == id 
+                                select a.MemberAccountLinkedMemberId).FirstOrDefault();
+
+            MemberAccountLinkedMember linked = db.MemberAccountLinkedMembers.Find(getLinkid);
+
+            ViewBag.MemberAccountLinkedMember = linked;
+
             return View(member);
         }
 

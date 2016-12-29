@@ -22,12 +22,14 @@ namespace ClubMembership.DAL
 
         public DbSet<AccountType> AccountType { get; set; }
         public DbSet<MemberAccount> MemberAccount { get; set; }
+        public DbSet<MemberAccountLinkedMember> MemberAccountLinkedMembers { get; set; }
         public DbSet<MemberAccountTransaction> MemberAccountTransactions { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
         public DbSet<MemberPaymentMethod> MemberPaymentMethod { get; set; }
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<PaymentStatus> PaymentStatus { get; set; }
 
+        public DbSet<RelationshipType> RelationshipTypes { get; set; }
         public DbSet<MemberAccountCharge> MemberAccountCharge { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -42,8 +44,9 @@ namespace ClubMembership.DAL
                    cs.MapRightKey("MemberId");
                    cs.ToTable("CampaignMember");
                });
-
           
+
+
 
         }
     }

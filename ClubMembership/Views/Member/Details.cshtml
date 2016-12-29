@@ -1,169 +1,227 @@
-﻿@model ClubMembership.Models.Member
+﻿@using ClubMembership.Models
+@using Microsoft.Ajax.Utilities
+@model ClubMembership.Models.Member
 @{
     ViewBag.Title = "Details";
+    MemberAccountLinkedMember MemberAccountLinkedMemberList = ViewBag.MemberAccountLinkedMember;
 }
 
-<h2>Details</h2>
+<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/member_icon.jpg")" /> Members</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(m => m.MemberID)
-    
+
     <div class="form-horizontal">
         <h4>Member - @Html.DisplayFor(model => model.MemberID) : @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h4>
-        <hr/>
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-           
-             
+
+
             <div class="col-md-2"></div>
             <div class="col-md-5">
+                 
                 @if (ViewBag.imagePath != "")
                 {
                     @*<object data="~/Avatars/no_image.png" type="image/png">*@
-                    <img id="imgPhoto" src="~/Avatars/@ViewBag.imagePath"/>
-                        @*</object>*@
+                    <img id="imgPhoto" src="~/Avatars/@ViewBag.imagePath" />
+                    @*</object>*@
                 }
-                @Html.ActionLink("Change Photo", "UpdatePhoto", new {memberid = ViewBag.memberid})
+                @Html.ActionLink("Change Photo", "UpdatePhoto", new { memberid = ViewBag.memberid })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.MembershipDate, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.MembershipDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="control-label col-md-3" style="text-align: left">
                 @Html.DisplayFor(model => model.MembershipDate)
             </div>
-            @Html.LabelFor(model => model.MemberType, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.MemberType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="control-label col-md-5" style="text-align: left">
                 @Html.DisplayFor(model => model.MemberType)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new {@class = "control-label col-md-2"})
-             <div class="control-label col-md-3" style="text-align: left">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-3" style="text-align: left">
                 @Html.DisplayFor(model => model.Gender)
             </div>
-            @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="control-label col-md-5" style="text-align: left">
                 @Html.DisplayFor(model => model.Email)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Address1, htmlAttributes: new {@class = "control-label col-md-2"})
-             <div class="control-label col-md-3" style="text-align: left">
+            @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-3" style="text-align: left">
                 @Html.DisplayFor(model => model.Address1)
             </div>
 
-            @Html.LabelFor(model => model.Telephone1, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Telephone1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="control-label col-md-5" style="text-align: left">
                 @Html.DisplayFor(model => model.Telephone1)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.PostCode, htmlAttributes: new {@class = "control-label col-md-2"})
-             <div class="control-label col-md-3" style="text-align: left">
+            @Html.LabelFor(model => model.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-3" style="text-align: left">
                 @Html.DisplayFor(model => model.PostCode)
             </div>
 
-            @Html.LabelFor(model => model.Telephone2, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Telephone2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="control-label col-md-5" style="text-align: left">
                 @Html.DisplayFor(model => model.Telephone2)
             </div>
         </div>
 
-
-
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Expired, htmlAttributes: new {@class = "control-label col-md-2"})
-             <div class="control-label col-md-3" style="text-align: left">
-                @Html.EditorFor(model => model.Expired, new {htmlAttributes = new {@class = "form-control"}})
-
-            </div>
-            @Html.LabelFor(model => model.ExpiryNotes, htmlAttributes: new {@class = "control-label col-md-2"})
-            <div class="control-label col-md-5" style="text-align: left">
-                @Html.DisplayFor(model => model.ExpiryNotes)
-            </div>
-        </div>*@
     </div>
-   }
+}
+<div style="display:@( ViewBag.MemberAccountLinkedMember == null ? "None" : "")">
+    <h3>Linked to </h3>
 
+    <dl class="dl-horizontal">
+
+        <table class="table">
+            <tr>
+                <th>Account ID</th>
+                <th>Relationship Type</th>
+                <th>Additional Detail</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <td>
+                    @*@Html.ActionLink("","Details", "",new { accountId = item.AccountId })*@
+                    @Html.DisplayFor(model => MemberAccountLinkedMemberList.MemberAccount.AccountFullDescription)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(model => MemberAccountLinkedMemberList.RelationshipType.Description)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(model => MemberAccountLinkedMemberList.AdditionalDetails)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => MemberAccountLinkedMemberList.DateAdded)
+                </td>
+            </tr>
+
+
+        </table>
+
+    </dl>
+
+</div>
+<br /><br />
 <div>
     <h4>Accounts</h4>
 
-    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "MemberAccount", new {memberId = Model.MemberID})'" ViewBag.ActiveAccount style="display:@(item.Suspended == true || item.Blocked == true ? "None" : "")">Create New Account</button>
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "MemberAccount", new {memberId = Model.MemberID})'" style="display:@(ViewBag.ActiveAccount == true  ? "None" : "")">Create New Account</button>
 
     <dl class="dl-horizontal">
-       
-            <table class="table">
-                <tr>
-                    <th>Account ID</th>
-                    <th>Balance</th>
-                    <th>Start</th> 
-                    <th>Status</th>
-                    <th></th>
+
+        <table class="table">
+            <tr>
+                <th>Account ID</th>
+                <th>Balance</th>
+                <th>Start</th>
+                <th>Linked</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.MemberAccounts)
+            {
+                <tr style="@(item.Suspended == true ? "background-color: #ffe4e1" : "")">
+                    <td>
+                        @*@Html.ActionLink("","Details", "",new { accountId = item.AccountId })*@
+                        @Html.ActionLink(item.AccountId,
+                            "Details",   // <-- ActionMethod
+                            "MemberAccount",  // <-- Controller Name.
+                            new { accountId = item.MemberAccountId }, // <-- Route arguments.
+                            null  // <-- htmlArguments .. which are none. You need this value
+                                  //     otherwise you call the WRONG method ...
+                                  //     (refer to comments, below).
+                            )
+                        @*@Html.DisplayFor(modelItem => item.AccountId)*@
+                    </td>
+                    <td style="font-weight: Bold; color: @(item.MemberAccountTransactions.Sum(d => d.Amount) < 0 ? "Red" : "Blue")">
+                        @String.Format("{0:c}", item.MemberAccountTransactions.Sum(d => d.Amount))
+                    </td>
+                    <td>
+                        @item.StartDate.ToString("dd'/'MM'/'yyyy")
+                    </td>
+                    <td>
+                        @foreach (var itemperson in item.MemberAccountLinkedMembers)
+                        {
+
+                            @Html.ActionLink("(" + itemperson.Member.MemberID + " " + itemperson.Member.FullName + ")",
+                            "Details",   // <-- ActionMethod
+                            "Member",  // <-- Controller Name.
+                            new { id = itemperson.MemberId }, // <-- Route arguments.
+                                                                     null  // <-- htmlArguments .. which are none. You need this value
+                                                                           //     otherwise you call the WRONG method ...
+                                                                           //     (refer to comments, below).
+                            )
+
+                        }
+                    </td>
+                    <td>
+                        @(item.Suspended == true || item.Blocked == true ? "" : "Active")
+                        @(item.Suspended == true ? "Suspended" : "")
+                        @(item.Blocked == true ? "Blocked" : "")
+                    </td>
+                    <td>
+                        <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Index", "Transaction", new {memberId = Model.MemberID, memberAccount = item.MemberAccountId})'">Charges/Payments</button>
+                        <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "Transaction", new {memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId})'">Record Payment</button>
+                        <button type="button" class="buttonStyleDelete" onclick="location.href = '@Url.Action("Create", "Transaction", new {memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId})'" style="display:@(item.Suspended == true || item.Blocked == true ? "None" : "")">Block</button>
+                        <button type="button" class="buttonStyleDelete" onclick="location.href = '@Url.Action("Create", "Transaction", new { memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId })'" style="display:@(item.Suspended == true ? "None" : "")">Suspend</button>
+                    </td>
                 </tr>
-                @foreach (var item in Model.MemberAccounts)
-                {
-                    <tr style="@(item.Suspended == true ? "background-color: #ffe4e1" : "")">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MemberAccountId) 
-                        </td>
-                        <td style="font-weight: Bold; color: @(item.MemberAccountTransactions.Sum(d => d.Amount) < 0 ? "Red" : "Blue")">
-                            @String.Format("{0:c}", item.MemberAccountTransactions.Sum(d => d.Amount))
-                        </td>
-                        <td >
-                            @item.StartDate.ToString("dd'/'MM'/'yyyy")
-                        </td>
-                        <td>
-                            @(item.Suspended == true || item.Blocked == true ? "" : "Active")
-                            @(item.Suspended == true ? "Suspended" : "")
-                            @(item.Blocked == true ? "Blocked" : "")
-                        </td>
-                        <td >
-                            <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Index", "Transaction", new {memberId = Model.MemberID, memberAccount = item.MemberAccountId})'">Charges/Payments</button>
-                            <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "Transaction", new {memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId})'">Record Payment</button>
-                            <button type="button" class="buttonStyleDelete" onclick="location.href = '@Url.Action("Create", "Transaction", new {memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId})'" style="display:@(item.Suspended == true || item.Blocked == true ? "None" : "")">Block</button>
-                            <button type="button" class="buttonStyleDelete" onclick="location.href = '@Url.Action("Create", "Transaction", new { memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId })'" style="display:@(item.Suspended == true ? "None" : "")">Suspend</button>
-                        </td>
-                    </tr>
-                }
-            </table>
-     
+            }
+
+        </table>
+
     </dl>
 
 </div>
 
+
+
+
+
 <div>
 
-        <h4>Classes</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dd>
-                <table class="table">
+    <h4>Classes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Class Name</th>
+                    <th>Level</th>
+                </tr>
+                @foreach (var item in Model.Campaigns)
+                {
                     <tr>
-                        <th>Class Name</th>
-                        <th>Level</th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Level)
+                        </td>
                     </tr>
-                    @foreach (var item in Model.Campaigns)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Level)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </dd>
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

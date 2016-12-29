@@ -16,7 +16,7 @@
 @*test for commit*@
 @using (Html.BeginForm("Index", "Transaction", FormMethod.Get))
 {
-    <p>
+    <p style="display: none">
         Search by Member: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" class="buttonStyle" />
         | Filter:
@@ -69,7 +69,7 @@
                 @Html.DisplayFor(modelItem => item.TransactionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MemberAccount.MemberAccountId)
+                @Html.DisplayFor(modelItem => item.MemberAccount.AccountId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MemberAccount.Member.MemberID)
@@ -120,4 +120,4 @@
 <br />
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    new { memberId = ViewBag.MemberId, memberAccount = ViewBag.MemberAccount, page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

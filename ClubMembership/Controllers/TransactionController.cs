@@ -18,20 +18,7 @@ namespace ClubMembership.Controllers
     public class TransactionController : Controller
     {
         private MembershipContext db = new MembershipContext();
-
-
-        //// GET: Member
-        //public ActionResult Index(int memberid, int accountid, int? page)
-        //{
-        //    var memberAccountPayment = from a in db.MemberAccountTransactions
-        //                           join acc in db.MemberAccount on a.MemberAccountId equals acc.MemberAccountId
-        //                           join mem in db.Members on acc.MemberId equals mem.Id
-        //                           where (a.TransactionTypeId == 2)
-        //                           select a;
-        //    int pageSize = 10;
-        //    int pageNumber = (page ?? 1);
-        //    return View(memberAccountPayment.ToPagedList(pageNumber, pageSize));
-        //}
+        
         // GET: Member
         public ActionResult Index(int? memberId, int? memberAccount ,string sortOrder, string searchString, string currentFilter, int? page, string type, bool topCondition = false)
         {
@@ -135,15 +122,17 @@ namespace ClubMembership.Controllers
                 return View(memberAccountPayment.ToPagedList(pageNumber, pageSize));
             } 
         }
-         
-
+          
         // GET: Campaign/Create
-        public ActionResult Create(int? id, int? memberId, int? accountId)
+        public ActionResult Create(int? id, int? memberId, int? memberAccount)
         {
+            MemberAccount account = db.MemberAccount.Find(memberAccount);
             ViewBag.PaymentMethodId = new SelectList(db.PaymentMethod, "PaymentMethodId", "Description");
             ViewBag.PaymentStatusId = new SelectList(db.PaymentStatus
                        .ToList(), "PaymentStatusId", "Description");
-            ViewBag.MemberId = memberId; 
+            ViewBag.MemberId = memberId;
+            ViewBag.MemberAccountId = memberAccount;
+            ViewBag.FullAccountName = account.AccountFullDescription;
             return View();
         }
 
@@ -162,7 +151,7 @@ namespace ClubMembership.Controllers
                 var memberId = Request["hidMemberId"];
                 db.MemberAccountTransactions.Add(memberAccountPayment);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { memberId });
+                return RedirectToAction("Details","Member", new { id = memberId });
             }
 
             //ViewBag.AccountId = new SelectList(db.MemberAccount

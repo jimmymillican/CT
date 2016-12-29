@@ -3,7 +3,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "TimeSheet";
+    ViewBag.Title = "Members";
 }
 <h2><img id="imgPhoto" src="@Url.Content("~/images/icons/member_icon.jpg")" /> Members</h2>
 <p>
@@ -54,7 +54,16 @@
     {
         <tr>
             <td>
-                <img id="imgPhoto" src="@Url.Content("~/Avatars/" + @item.Id + ".jpg")" width="60px" />
+                @if (File.Exists(Server.MapPath("~/Avatars/" + @item.Id + ".jpg")))
+                {
+                    <img id="imgPhoto" src="@Url.Content("~/Avatars/" + @item.Id + ".jpg")" width="60px" />
+                }
+                else
+                {
+                    <img id="imgPhoto" src="@Url.Content("~/Avatars/no_image.png")" width="60px" />
+                }
+                
+                
             </td>
             <td>
                 @Html.ActionLink(item.MemberID, "Details", new { id = item.Id })

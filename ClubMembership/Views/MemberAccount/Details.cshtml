@@ -1,0 +1,107 @@
+﻿@model ClubMembership.Models.MemberAccount
+@{
+    ViewBag.Title = "New Account";
+}
+<h2>Account Details</h2>
+<h4>Member - @Html.DisplayFor(model => model.Member.MemberID) : @Html.DisplayFor(model => model.Member.FullName) ** Acc: @Html.DisplayFor(model => model.AccountId)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken() 
+    <div class="form-horizontal">
+     <hr/>
+          @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+     <div class="form-group">
+            @Html.LabelFor(model => model.AccountFullDescription, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="control-label col-md-3" style="text-align: left">
+                @Html.DisplayFor(model => model.AccountFullDescription)
+            </div>
+            @Html.LabelFor(model => model.AccountTypeId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="control-label col-md-5" style="text-align: left">
+                @Html.DisplayFor(model => model.AccountTypeId.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-3" style="text-align: left">
+                @Html.DisplayFor(model => model.Amount)
+            </div>
+            @Html.LabelFor(model => model.AdditionalDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-5" style="text-align: left">
+                @Html.DisplayFor(model => model.AdditionalDetails)
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.Hidden("hidMemberId", (object) ViewBag.MemberId)
+                <input type="submit" value="Create New Account" class="buttonStyleAdd"/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h4>Linked Members</h4>
+
+        <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("LinkMember", "MemberAccount", new {accountId = Model.MemberAccountId})'">Link a Member</button>
+        @*style="display:@(ViewBag.ActiveAccount = true ? "None" : "")"*@
+
+        <dl class="dl-horizontal">
+
+            <table class="table">
+                <tr>
+                    <th>Member ID</th>
+                    <th>Member Name</th>
+                    <th>Relationship to Acc Holder</th>
+                    <th>Additional Details</th>
+                    <th>Created</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.MemberAccountLinkedMembers)
+                {
+                    //style = "@(item.Suspended == true ? "background - color: #ffe4e1" : "")"
+                    <tr>
+                        <td>
+                             @Html.ActionLink(item.Member.MemberID,
+                            "Details",   // <-- ActionMethod
+                            "Member",  // <-- Controller Name.
+                            new { id = item.MemberId }, // <-- Route arguments.
+                            null  // <-- htmlArguments .. which are none. You need this value
+                                  //     otherwise you call the WRONG method ...
+                                  //     (refer to comments, below).
+                            )
+                            
+                        </td> 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Member.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RelationshipType.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdditionalDetails)
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.DateAdded)</td>
+                        <td>
+                            @*<button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Index", "Transaction", new {memberId = Model.MemberID, memberAccount = item.MemberAccountId})'">Charges/Payments</button>
+    <button type="button" class="buttonStyleAdd" onclick="location.href = '@Url.Action("Create", "Transaction", new {memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId})'">Record Payment</button>
+    <button type="button" class="buttonStyleDelete" onclick="location.href = '@Url.Action("Create", "Transaction", new {memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId})'" style="display:@(item.Suspended == true || item.Blocked == true ? "None" : "")">Block</button>
+    <button type="button" class="buttonStyleDelete" onclick="location.href = '@Url.Action("Create", "Transaction", new { memberId = ViewBag.MemberId, memberAccount = item.MemberAccountId })'" style="display:@(item.Suspended == true ? "None" : "")">Suspend</button>
+                            *@   </td>
+                    </tr>
+                }
+            </table>
+
+        </dl>
+
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/autocomplete")
+}
+

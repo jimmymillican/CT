@@ -11,6 +11,12 @@ namespace ClubMembership.Models
         [Display(Name = "Account ID")]
         public int MemberAccountId { get; set; }
 
+        [Display(Name = "Account ID")]
+        public string AccountId
+        {
+            get { return ("0000000000" + MemberAccountId).ToString().Substring(Math.Max(0, ("0000000000" + MemberAccountId).ToString().Length - 4)); }
+        }
+
         [Display(Name = "Member")]
         public int MemberId { get; set; }
 
@@ -27,15 +33,27 @@ namespace ClubMembership.Models
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
 
-        [Display(Name = "Blocked")]
-        public bool? Blocked { get; set; }
+        private Boolean _blocked = false;
+
+        [Display(Name = "Blocked")] 
+        public Boolean Blocked
+        {
+            get { return _blocked; }
+            set { _blocked = value; }
+        }
 
         [Display(Name = "Blocked Date")]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? BlockedDate { get; set; }
 
+        private Boolean _suspended = false;
+
         [Display(Name = "Suspended")]
-        public bool? Suspended { get; set; }
+        public Boolean Suspended
+        {
+            get { return _suspended; }
+            set { _suspended = value; }
+        }
 
         [Display(Name = "Suspended Date")]
         [DisplayFormat(DataFormatString = "{0: dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -53,11 +71,12 @@ namespace ClubMembership.Models
         {
             get
             {
-                return Member.FullName + " (Account: " + MemberAccountId + ")";
+                return Member.FullName + " (Acc: " + AccountId + ")";
             }
         }
 
         public virtual ICollection<MemberAccountTransaction> MemberAccountTransactions { get; set; }
 
+        public virtual ICollection<MemberAccountLinkedMember> MemberAccountLinkedMembers { get; set; }
     }
 }

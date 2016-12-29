@@ -275,8 +275,22 @@
     <Compile Include="Migrations\201612221946313_New Account Changes.Designer.cs">
       <DependentUpon>201612221946313_New Account Changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612272334225_MemberAccountsLinkedMembers.cs" />
+    <Compile Include="Migrations\201612272334225_MemberAccountsLinkedMembers.Designer.cs">
+      <DependentUpon>201612272334225_MemberAccountsLinkedMembers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612280005523_Relationship Type.cs" />
+    <Compile Include="Migrations\201612280005523_Relationship Type.Designer.cs">
+      <DependentUpon>201612280005523_Relationship Type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612282124387_Altered Suspended and Blocked to default to 0.cs" />
+    <Compile Include="Migrations\201612282124387_Altered Suspended and Blocked to default to 0.Designer.cs">
+      <DependentUpon>201612282124387_Altered Suspended and Blocked to default to 0.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MemberAccountCharge.cs" />
+    <Compile Include="Models\MemberAccountLinkedMember.cs" />
+    <Compile Include="Models\RelationshipType.cs" />
     <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Models\PaymentStatus.cs" />
     <Compile Include="Models\AddedCampaigns.cs" />
@@ -434,6 +448,8 @@
     <Content Include="Views\MemberAccount\Index.cshtml" />
     <Content Include="Views\MemberAccount\Summary.cshtml" />
     <Content Include="Views\MemberAccount\Create.cshtml" />
+    <Content Include="Views\MemberAccount\Details.cshtml" />
+    <Content Include="Views\MemberAccount\LinkMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -515,6 +531,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612221946313_New Account Changes.resx">
       <DependentUpon>201612221946313_New Account Changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612272334225_MemberAccountsLinkedMembers.resx">
+      <DependentUpon>201612272334225_MemberAccountsLinkedMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612280005523_Relationship Type.resx">
+      <DependentUpon>201612280005523_Relationship Type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612282124387_Altered Suspended and Blocked to default to 0.resx">
+      <DependentUpon>201612282124387_Altered Suspended and Blocked to default to 0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

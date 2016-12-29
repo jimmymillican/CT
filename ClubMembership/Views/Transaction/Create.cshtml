@@ -2,15 +2,14 @@
 @{
     ViewBag.Title = "Payments";
 }
-<h2>Record Payment</h2>
+<h2><img id="imgPhoto" src="@Url.Content("~/images/icons/payment.jpg")" /> Record Payment</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Record New Entry</h4>
-        <hr />
+         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
@@ -18,9 +17,8 @@
             @Html.LabelFor(model => model.MemberAccountId, "Account ID", htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @*@Html.DropDownList("MemberAccountId", null, htmlAttributes: new { @class = "form-control" })*@
-                <input type="text" id="txtCustomer" name="CustomerName" class="form-control"/>
-                @Html.HiddenFor(model => model.MemberAccountId, new {htmlAttributes = new {@class = "form-control"}})
-             
+                <input type="text" id="txtCustomer" name="CustomerName" class="form-control" value="@ViewBag.FullAccountName"/>
+                 @Html.Hidden("MemberAccountId", (object)ViewBag.MemberAccountId)
                 @Html.ValidationMessageFor(model => model.MemberAccountId, "", new {@class = "text-danger"})
 
                 <input type="hidden" id="hfCustomer" name="CustomerId"/>

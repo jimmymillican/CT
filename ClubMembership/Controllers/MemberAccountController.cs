@@ -25,6 +25,14 @@ namespace ClubMembership.Controllers
             return View();
         }
 
+        public ActionResult Details(int? accountId)
+        {
+
+            MemberAccount account = db.MemberAccount.Find(accountId);
+
+            return View(account);
+        }
+
         // GET: Campaign/Create
         public ActionResult Create(int? memberId)
         {
@@ -47,6 +55,7 @@ namespace ClubMembership.Controllers
             ViewBag.MemberFullName = member.FullName;
             return View();
         }
+
 
         // POST: Timesheet/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -72,6 +81,44 @@ namespace ClubMembership.Controllers
 
             return View();
         }
+
+        public ActionResult LinkMember(int? accountId)
+        { 
+            MemberAccount memberAccount = db.MemberAccount.Find(accountId);
+
+            ViewBag.MemberId = memberAccount.MemberId;
+            ViewBag.MemberAccountId = accountId;
+            ViewBag.AccountId = memberAccount.AccountId;
+            ViewBag.MemberFullName = memberAccount.Member.FullName;
+
+            ViewBag.RelationshipTypeId = new SelectList(db.RelationshipTypes, "RelationshipTypeId", "Description");
+            
+            return View();
+        }
+
+        // POST: Timesheet/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LinkMember([Bind(Include = "MemberAccountId,MemberId,RelationshipTypeId,AdditionalDetails")] MemberAccountLinkedMember memberLink)
+        {
+            var accountId = Request["hidAccountId"];
+
+            memberLink.MemberAccountId = Int32.Parse(accountId);
+
+
+            if (ModelState.IsValid)
+            {
+                db.MemberAccountLinkedMembers.Add(memberLink);
+                db.SaveChanges();
+                return RedirectToAction("Details", "MemberAccount", new { accountId });
+            }
+
+
+            return View();
+        }
+
 
         // GET: Member
         public ActionResult Charge(string sortOrder, string searchString, string currentFilter, int? page, string type, bool topCondition = false)
@@ -172,7 +219,7 @@ namespace ClubMembership.Controllers
 
             var customers = (from member in db.Members
                                 join memAccount in db.MemberAccount on member.Id equals memAccount.MemberId
-                             where (member.FirstName + " " + member.LastName + " ( ** Acc:" + memAccount.MemberAccountId + ")").Contains(term)
+                             where memAccount.Blocked  == false  && memAccount.Suspended == false && (member.FirstName + " " + member.LastName + " ( ** Acc:" + memAccount.MemberAccountId + ")").Contains(term)
                              select new
                              {
                                  label = (member.FirstName + " " + member.LastName + " ( ** Acc:" + memAccount.MemberAccountId + ")"),
@@ -183,7 +230,22 @@ namespace ClubMembership.Controllers
 
         }
 
+        public JsonResult AutoCompleteLinkMember(string term)
+        {
 
+            var customers = (from member in db.Members
+                             //join memAccount in db.MemberAccount on member.Id equals memAccount.MemberId into accounts
+                             //from j in accounts.DefaultIfEmpty()
+                             where  (member.Id + " " + member.FirstName + " " + member.LastName ).Contains(term)
+                             select new
+                             {
+                                 label = (member.Id + " " + member.FirstName + " " + member.LastName ),
+                                 val = member.Id
+                             }).ToList();
+
+            return Json(customers);
+
+        }
 
     }
 }
